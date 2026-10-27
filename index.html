@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fizza Rabbani | Graphic Designer • Video Editor • AI Learner</title>
+
+<!-- ===== FONTS ===== -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Poppins:wght@300;400;500;600&family=Great+Vibes&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+/* ============ RESET & DARK BLUE THEME ============ */
+* { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+:root {
+  --bg: #0a0f1e;                /* deep navy */
+  --bg-card: #101830;
+  --text: #e8edf7;
+  --muted: #94a3b8;
+  --accent: #60a5fa;            /* glowing blue */
+  --accent2: #22d3ee;           /* neon cyan */
+  --accent3: #a78bfa;           /* violet glow */
+  --grad: linear-gradient(90deg, #3b82f6, #22d3ee);
+  --border: rgba(147,197,253,0.12);
+  --shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ✨ glowing blue dot pattern */
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: -3;
+  background-image: radial-gradient(rgba(96,165,250,0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse at 50% 0%, black 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 0%, black 30%, transparent 80%);
+}
+
+h1, h2, h3 { font-family: 'Playfair Display', serif; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+.script { font-family: 'Great Vibes', cursive; }
+
+::selection { background: var(--accent2); color: #0a0f1e; }
+
+/* ============ 🎬 CINEMATIC PRELOADER ============ */
+#preloader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: #0a0f1e;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  transition: opacity 1s ease, visibility 1s;
+}
+#preloader.done { opacity: 0; visibility: hidden; }
+.pre-name {
+  font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900;
+  background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: preGlow 2s ease-in-out infinite;
+}
+.pre-sub {
+  font-family: 'JetBrains Mono', monospace; color: var(--accent2);
+  letter-spacing: 6px; font-size: 0.75rem; margin-top: 14px;
+}
+.pre-bar { width: 200px; height: 2px; background: rgba(255,255,255,0.1); margin-top: 26px; border-radius: 2px; overflow: hidden; }
+.pre-bar i { display: block; height: 100%; width: 0; background: var(--grad); animation: preLoad 2.2s ease forwards; box-shadow: 0 0 12px rgba(34,211,238,0.8); }
+@keyframes preLoad { to { width: 100%; } }
+@keyframes preGlow { 0%,100% { filter: drop-shadow(0 0 8px rgba(59,130,246,0.4)); } 50% { filter: drop-shadow(0 0 26px rgba(34,211,238,0.6)); } }
+
+/* ============ 🌌 BLUE GLOW AURORA ============ */
+.aurora { position: fixed; inset: 0; z-index: -2; overflow: hidden; }
+.blob { position: absolute; border-radius: 50%; filter: blur(110px); opacity: 0.4; }
+.blob.b1 { width: 480px; height: 480px; background: #1d4ed8; top: -130px; left: -110px; animation: drift1 16s ease-in-out infinite alternate; }
+.blob.b2 { width: 440px; height: 440px; background: #0e7490; bottom: -110px; right: -90px; animation: drift2 20s ease-in-out infinite alternate; }
+.blob.b3 { width: 360px; height: 360px; background: #5b21b6; top: 44%; left: 56%; opacity: 0.3; animation: drift3 24s ease-in-out infinite alternate; }
+.blob.b4 { width: 320px; height: 320px; background: #0369a1; top: 16%; right: 16%; opacity: 0.3; animation: drift1 22s ease-in-out infinite alternate-reverse; }
+@keyframes drift1 { to { transform: translate(110px, 80px) scale(1.15); } }
+@keyframes drift2 { to { transform: translate(-120px, -70px) scale(1.1); } }
+@keyframes drift3 { to { transform: translate(-90px, -110px) scale(1.25); } }
+
+/* ============ ✨ GLOWING PARTICLES ============ */
+#stars { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+
+/* ============ 🖱️ CURSOR GLOW ============ */
+#cursorGlow {
+  position: fixed; width: 360px; height: 360px; border-radius: 50%; z-index: -1;
+  background: radial-gradient(circle, rgba(59,130,246,0.16), transparent 65%);
+  transform: translate(-50%, -50%); pointer-events: none;
+}
+
+/* ============ 📊 SCROLL PROGRESS ============ */
+#progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+  background: var(--grad); z-index: 1000;
+  box-shadow: 0 0 14px rgba(34,211,238,0.9);
+}
+
+/* ============ NAVBAR ============ */
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 7%;
+  background: rgba(10,15,30,0.75);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; }
+.logo span {
+  background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: logoShine 4s linear infinite;
+  background-size: 200% auto;
+}
+@keyframes logoShine { to { background-position: 200% center; } }
+nav ul { display: flex; gap: 32px; list-style: none; }
+nav a { color: var(--muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 1px; transition: .3s; position: relative; }
+nav a::after { content: ''; position: absolute; left: 0; bottom: -5px; width: 0; height: 2px; background: var(--grad); transition: .3s; box-shadow: 0 0 8px rgba(34,211,238,0.8); }
+nav a:hover { color: var(--text); }
+nav a:hover::after { width: 100%; }
+
+/* ============ HERO ============ */
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+  padding: 0 7%; position: relative;
+}
+.hero .tag {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--accent2); font-size: 0.9rem; letter-spacing: 3px; margin-bottom: 18px;
+  text-shadow: 0 0 12px rgba(34,211,238,0.5);
+}
+.hero h1 { font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 900; line-height: 1.12; }
+.hero h1 span {
+  background: linear-gradient(90deg, #60a5fa, #22d3ee, #a78bfa, #60a5fa);
+  background-size: 300% auto;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: shine 6s linear infinite;
+}
+@keyframes shine { to { background-position: 300% center; } }
+
+.hero h1 .word { display: inline-block; overflow: hidden; }
+.hero h1 .word i {
+  display: inline-block; font-style: normal; transform: translateY(110%);
+  animation: riseUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes riseUp { to { transform: translateY(0); } }
+
+.typing-box { margin-top: 26px; font-size: clamp(1.1rem, 2.5vw, 1.5rem); color: var(--muted); min-height: 2.4rem; }
+#typed { color: var(--accent2); font-weight: 600; text-shadow: 0 0 14px rgba(34,211,238,0.5); }
+.cursor-blink { display: inline-block; width: 3px; height: 1.3em; background: var(--accent2); margin-left: 4px; vertical-align: middle; animation: blink 0.8s step-end infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+.hero .subtitle { color: var(--muted); margin: 22px 0 36px; max-width: 560px; }
+.hero .signature { font-size: 2.4rem; color: var(--accent); margin-top: 34px; animation: fadeFloat 4s ease-in-out infinite; }
+@keyframes fadeFloat { 0%,100% { transform: translateY(0); opacity: .9; } 50% { transform: translateY(-8px); opacity: 1; } }
+
+.btn {
+  display: inline-block; padding: 14px 36px; border-radius: 50px;
+  background: var(--grad); color: #0a0f1e; font-weight: 600; text-decoration: none;
+  font-family: 'Poppins', sans-serif; font-size: 0.95rem;
+  transition: transform .3s, box-shadow .3s; margin: 8px 16px 8px 0;
+  position: relative; overflow: hidden;
+  box-shadow: 0 6px 20px rgba(59,130,246,0.35);
+}
+.btn:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 12px 34px rgba(34,211,238,0.45); }
+.btn::after {
+  content: ''; position: absolute; top: 0; left: -80%; width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+  transform: skewX(-25deg); animation: sweep 3.5s infinite;
+}
+@keyframes sweep { 0% { left: -80%; } 50%, 100% { left: 130%; } }
+.btn.ghost { background: transparent; border: 1px solid var(--accent); color: var(--text); box-shadow: none; }
+.btn.ghost:hover { box-shadow: 0 8px 24px rgba(59,130,246,0.3); }
+
+.scroll-hint {
+  position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+  font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 3px; color: var(--muted);
+}
+.scroll-hint::after {
+  content: ''; display: block; width: 1px; height: 40px; margin: 10px auto 0;
+  background: linear-gradient(var(--accent2), transparent);
+  animation: scrollLine 2s ease-in-out infinite;
+}
+@keyframes scrollLine { 0% { opacity: 0; transform: scaleY(0); } 50% { opacity: 1; transform: scaleY(1); } 100% { opacity: 0; transform: scaleY(1); } }
+
+/* ============ SECTIONS ============ */
+section { padding: 100px 7%; position: relative; }
+.sec-title { text-align: center; margin-bottom: 60px; }
+.sec-title .mono { color: var(--accent2); font-size: 0.85rem; letter-spacing: 3px; }
+.sec-title h2 { font-size: clamp(2rem, 4vw, 2.8rem); margin-top: 8px; }
+.sec-title h2 em { font-style: normal; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* ============ ABOUT ============ */
+.about-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 60px; align-items: center; }
+.about-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px;
+  padding: 50px 40px; text-align: center; position: relative; overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.about-card::before {
+  content: ''; position: absolute; inset: -2px; border-radius: 24px; padding: 2px;
+  background: conic-gradient(from var(--spin, 0deg), #3b82f6, #22d3ee, #a78bfa, #3b82f6);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  animation: spinBorder 6s linear infinite;
+}
+@property --spin { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+@keyframes spinBorder { to { --spin: 360deg; } }
+
+.avatar {
+  width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 24px;
+  background: var(--grad); display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif; font-size: 3.2rem; font-weight: 900; color: #0a0f1e;
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+@keyframes pulseGlow { 0%,100% { box-shadow: 0 0 20px rgba(59,130,246,0.4); } 50% { box-shadow: 0 0 55px rgba(34,211,238,0.55); } }
+.about-card .script { font-size: 2.2rem; color: var(--accent); }
+.about-text p { color: var(--muted); margin-bottom: 18px; }
+.about-text strong { color: var(--text); }
+.stats { display: flex; gap: 40px; margin-top: 34px; }
+.stats b {
+  font-family: 'Playfair Display', serif; font-size: 2.4rem; display: block;
+  background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.stats small { color: var(--muted); font-size: 0.8rem; }
+
+/* ============ SKILLS ============ */
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 26px; }
+.skill-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px;
+  padding: 36px 30px; transition: .4s; position: relative; overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.skill-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--grad); transform: scaleX(0); transform-origin: left; transition: .4s;
+}
+.skill-card:hover::before { transform: scaleX(1); }
+.skill-card:hover { transform: translateY(-10px); border-color: rgba(59,130,246,0.5); box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 40px rgba(59,130,246,0.18); }
+.skill-card .icon { font-size: 2.4rem; display: inline-block; transition: .4s; }
+.skill-card:hover .icon { transform: scale(1.25) rotate(-8deg); }
+.skill-card h3 { font-size: 1.25rem; margin: 16px 0 10px; }
+.skill-card p { color: var(--muted); font-size: 0.92rem; }
+.skill-card .level { margin-top: 20px; height: 6px; border-radius: 6px; background: rgba(255,255,255,0.08); }
+.skill-card .level i { display: block; height: 100%; width: 0; border-radius: 6px; background: var(--grad); transition: width 1.4s cubic-bezier(0.22, 1, 0.36, 1); box-shadow: 0 0 12px rgba(34,211,238,0.7); }
+.skill-card.show .level i { width: var(--w); }
+.skill-card .pct { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent2); margin-top: 8px; display: block; text-align: right; }
+
+/* ============ EDUCATION TIMELINE ============ */
+.timeline { max-width: 700px; margin: 0 auto; position: relative; padding-left: 36px; border-left: 2px solid var(--border); }
+.t-item { position: relative; margin-bottom: 44px; transition: .3s; }
+.t-item:hover { transform: translateX(8px); }
+.t-item::before {
+  content: ''; position: absolute; left: -44px; top: 6px; width: 14px; height: 14px;
+  border-radius: 50%; background: var(--grad); box-shadow: 0 0 0 5px rgba(59,130,246,0.18);
+  animation: dotPulse 2.5s ease-in-out infinite;
+}
+@keyframes dotPulse { 0%,100% { box-shadow: 0 0 0 4px rgba(59,130,246,0.18); } 50% { box-shadow: 0 0 0 10px rgba(59,130,246,0.06); } }
+.t-item .mono { color: var(--accent2); font-size: 0.8rem; }
+.t-item h3 { font-size: 1.3rem; margin: 6px 0; }
+.t-item p { color: var(--muted); font-size: 0.95rem; }
+
+/* ============ PROJECTS ============ */
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 26px; }
+.project {
+  border-radius: 20px; overflow: hidden; border: 1px solid var(--border);
+  background: var(--bg-card); transition: .4s; box-shadow: var(--shadow);
+}
+.project:hover { transform: translateY(-10px) scale(1.01); box-shadow: 0 25px 60px rgba(0,0,0,0.6); }
+.project .cover { height: 190px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; position: relative; overflow: hidden; }
+.project .cover::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transform: translateX(-100%);
+}
+.project:hover .cover::after { animation: coverSweep 1s ease forwards; }
+@keyframes coverSweep { to { transform: translateX(100%); } }
+.c1 { background: linear-gradient(135deg, #1e3a8a, #3b82f6); }
+.c2 { background: linear-gradient(135deg, #0e7490, #22d3ee); }
+.c3 { background: linear-gradient(135deg, #4c1d95, #a78bfa); }
+.c4 { background: linear-gradient(135deg, #075985, #38bdf8); }
+.project .info { padding: 26px; }
+.project .info .mono { color: var(--accent2); font-size: 0.75rem; }
+.project h3 { margin: 8px 0; font-size: 1.2rem; }
+.project p { color: var(--muted); font-size: 0.9rem; }
+
+/* ============ VIDEO SHOWREEL ============ */
+.video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(440px, 1fr)); gap: 30px; }
+.video-card {
+  border-radius: 20px; overflow: hidden; border: 1px solid var(--border);
+  background: var(--bg-card); transition: .4s; box-shadow: var(--shadow);
+  position: relative; cursor: pointer;
+}
+.video-card:hover {
+  transform: translateY(-10px) scale(1.01);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.6), 0 0 50px rgba(34,211,238,0.15);
+  border-color: rgba(59,130,246,0.5);
+}
+.video-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--grad); transform: scaleX(0); transform-origin: left; transition: .4s; z-index: 2;
+}
+.video-card:hover::before { transform: scaleX(1); }
+.video-thumb {
+  position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden;
+  background: linear-gradient(135deg, #1e3a8a, #0e7490);
+}
+.video-thumb video {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(0.65); transition: .5s;
+}
+.video-card:hover .video-thumb video { filter: brightness(0.85); transform: scale(1.05); }
+.play-overlay {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  z-index: 1; transition: .4s;
+}
+.play-btn {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: rgba(59,130,246,0.25); backdrop-filter: blur(12px);
+  border: 2px solid rgba(96,165,250,0.5);
+  display: flex; align-items: center; justify-content: center;
+  transition: .4s; position: relative;
+}
+.play-btn::before {
+  content: ''; width: 0; height: 0;
+  border-style: solid; border-width: 12px 0 12px 22px;
+  border-color: transparent transparent transparent #fff;
+  margin-left: 4px;
+}
+.play-btn::after {
+  content: ''; position: absolute; inset: -6px; border-radius: 50%;
+  border: 1px solid rgba(34,211,238,0.3);
+  animation: playPulse 2.5s ease-in-out infinite;
+}
+@keyframes playPulse {
+  0%,100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.25); opacity: 0; }
+}
+.video-card:hover .play-btn {
+  background: rgba(59,130,246,0.45);
+  box-shadow: 0 0 40px rgba(34,211,238,0.4);
+  transform: scale(1.12);
+}
+.video-card .info { padding: 22px 26px; }
+.video-card .info .mono { color: var(--accent2); font-size: 0.75rem; letter-spacing: 2px; }
+.video-card .info h3 { font-size: 1.2rem; margin: 8px 0 6px; }
+.video-card .info p { color: var(--muted); font-size: 0.9rem; }
+.video-card .info .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.video-card .info .tags span {
+  padding: 4px 12px; border-radius: 20px; font-size: 0.72rem;
+  font-family: 'JetBrains Mono', monospace;
+  background: rgba(59,130,246,0.12); color: var(--accent); border: 1px solid rgba(59,130,246,0.2);
+}
+
+/* Delete button on video cards */
+.video-card .delete-btn {
+  position: absolute; top: 14px; right: 14px; z-index: 5;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(239,68,68,0.2); backdrop-filter: blur(8px);
+  border: 1px solid rgba(239,68,68,0.4); color: #fca5a5;
+  font-size: 1.1rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: .3s;
+}
+.video-card:hover .delete-btn { opacity: 1; }
+.video-card .delete-btn:hover {
+  background: rgba(239,68,68,0.5); color: #fff;
+  transform: scale(1.15);
+}
+
+/* ➕ Add Video Card */
+.add-video-card {
+  border-radius: 20px; border: 2px dashed rgba(96,165,250,0.3);
+  background: rgba(16,24,48,0.5); min-height: 320px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  cursor: pointer; transition: .4s; gap: 16px;
+}
+.add-video-card:hover {
+  border-color: var(--accent2); background: rgba(16,24,48,0.8);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 40px rgba(34,211,238,0.1);
+}
+.add-video-card .add-icon {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: rgba(59,130,246,0.15); border: 2px solid rgba(96,165,250,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem; color: var(--accent); transition: .4s;
+}
+.add-video-card:hover .add-icon {
+  background: rgba(59,130,246,0.3); border-color: var(--accent2);
+  transform: scale(1.1) rotate(90deg);
+  box-shadow: 0 0 30px rgba(34,211,238,0.3);
+}
+.add-video-card .add-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
+  color: var(--muted); letter-spacing: 2px; transition: .3s;
+}
+.add-video-card:hover .add-label { color: var(--accent2); }
+
+/* 📝 Add Video Modal */
+.add-modal-overlay {
+  position: fixed; inset: 0; z-index: 10001;
+  background: rgba(5,8,18,0.88); backdrop-filter: blur(16px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; transition: .4s;
+}
+.add-modal-overlay.active { opacity: 1; visibility: visible; }
+.add-modal {
+  width: 92%; max-width: 520px;
+  background: var(--bg-card); border: 1px solid rgba(59,130,246,0.25);
+  border-radius: 24px; padding: 40px 36px;
+  box-shadow: 0 0 80px rgba(34,211,238,0.12), 0 30px 80px rgba(0,0,0,0.6);
+  transform: scale(0.9) translateY(20px); transition: .4s;
+  position: relative;
+}
+.add-modal-overlay.active .add-modal { transform: scale(1) translateY(0); }
+.add-modal h3 {
+  font-family: 'Playfair Display', serif; font-size: 1.6rem;
+  margin-bottom: 6px;
+}
+.add-modal h3 em {
+  font-style: normal; background: var(--grad);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.add-modal .modal-sub {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+  color: var(--accent2); letter-spacing: 2px; margin-bottom: 28px;
+}
+.add-modal .close-modal {
+  position: absolute; top: 18px; right: 18px;
+  width: 38px; height: 38px; border-radius: 50%;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+  color: var(--muted); font-size: 1.2rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: .3s;
+}
+.add-modal .close-modal:hover {
+  background: rgba(239,68,68,0.2); color: #fca5a5;
+  transform: rotate(90deg);
+}
+
+.form-group { margin-bottom: 20px; }
+.form-group label {
+  display: block; font-size: 0.8rem; font-weight: 500;
+  color: var(--muted); margin-bottom: 8px; letter-spacing: 0.5px;
+}
+.form-group input, .form-group textarea {
+  width: 100%; padding: 12px 16px;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+  border-radius: 12px; color: var(--text); font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem; outline: none; transition: .3s;
+}
+.form-group input:focus, .form-group textarea:focus {
+  border-color: var(--accent); box-shadow: 0 0 20px rgba(59,130,246,0.15);
+}
+.form-group textarea { resize: vertical; min-height: 70px; }
+.form-group input::placeholder, .form-group textarea::placeholder { color: rgba(148,163,184,0.5); }
+
+/* File picker area */
+.file-picker {
+  border: 2px dashed rgba(96,165,250,0.25); border-radius: 16px;
+  padding: 28px 20px; text-align: center; cursor: pointer;
+  transition: .3s; position: relative; overflow: hidden;
+}
+.file-picker:hover { border-color: var(--accent2); background: rgba(59,130,246,0.05); }
+.file-picker.has-file { border-color: rgba(34,211,238,0.5); background: rgba(34,211,238,0.06); }
+.file-picker .fp-icon { font-size: 2rem; margin-bottom: 8px; }
+.file-picker .fp-text { font-size: 0.85rem; color: var(--muted); }
+.file-picker .fp-text strong { color: var(--accent2); }
+.file-picker .fp-name {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+  color: var(--accent2); margin-top: 8px; word-break: break-all;
+}
+.file-picker input[type="file"] { display: none; }
+
+.form-actions { display: flex; gap: 12px; margin-top: 28px; }
+.form-actions .btn { flex: 1; text-align: center; font-size: 0.9rem; padding: 13px 20px; }
+.form-actions .btn.ghost { flex: 0.6; }
+
+/* Source type tabs in modal */
+.source-type-tab {
+  display: flex; gap: 8px; margin-bottom: 20px;
+  background: rgba(255,255,255,0.03); padding: 5px; border-radius: 12px; border: 1px solid var(--border);
+}
+.source-type-tab button {
+  flex: 1; padding: 10px 14px; border-radius: 9px; border: none;
+  background: transparent; color: var(--muted); font-size: 0.85rem; font-weight: 500;
+  font-family: 'Poppins', sans-serif; cursor: pointer; transition: .3s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.source-type-tab button.active {
+  background: var(--grad); color: #fff; font-weight: 600;
+  box-shadow: 0 4px 15px rgba(59,130,246,0.3);
+}
+.source-type-tab button:hover:not(.active) {
+  color: var(--text); background: rgba(255,255,255,0.05);
+}
+
+/* Platform badge on card */
+.badge-tag {
+  display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.7rem;
+  font-family: 'JetBrains Mono', monospace; font-weight: 600;
+  background: rgba(239,68,68,0.2); color: #fca5a5; border: 1px solid rgba(239,68,68,0.4);
+  position: absolute; top: 14px; left: 14px; z-index: 4;
+}
+.badge-tag.file-badge {
+  background: rgba(34,211,238,0.15); color: #22d3ee; border-color: rgba(34,211,238,0.3);
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center; padding: 20px; color: var(--muted);
+  font-size: 0.9rem; grid-column: 1 / -1;
+}
+.empty-state .empty-icon { font-size: 3rem; margin-bottom: 12px; opacity: 0.5; }
+
+/* Lightbox Modal */
+.video-lightbox {
+  position: fixed; inset: 0; z-index: 10000;
+  background: rgba(5,8,18,0.92); backdrop-filter: blur(20px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; transition: .4s;
+}
+.video-lightbox.active { opacity: 1; visibility: visible; }
+.video-lightbox .lb-inner {
+  width: 90%; max-width: 960px; position: relative;
+  border-radius: 20px; overflow: hidden;
+  border: 1px solid rgba(59,130,246,0.3);
+  box-shadow: 0 0 80px rgba(34,211,238,0.2), 0 30px 80px rgba(0,0,0,0.7);
+  transform: scale(0.9); transition: .4s;
+}
+.video-lightbox.active .lb-inner { transform: scale(1); }
+.video-lightbox video {
+  width: 100%; display: block; border-radius: 20px; background: #000;
+}
+.lb-close {
+  position: absolute; top: -50px; right: 0;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+  color: #fff; font-size: 1.4rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: .3s; backdrop-filter: blur(10px);
+}
+.lb-close:hover {
+  background: rgba(239,68,68,0.3); border-color: rgba(239,68,68,0.5);
+  transform: rotate(90deg);
+}
+
+@media (max-width: 520px) {
+  .video-grid { grid-template-columns: 1fr; }
+  .video-lightbox .lb-inner { width: 96%; border-radius: 14px; }
+  .lb-close { top: -46px; }
+  .add-modal { padding: 28px 22px; }
+}
+
+/* ============ CONTACT ============ */
+.contact-wrap { max-width: 640px; margin: 0 auto; text-align: center; }
+.contact-wrap .script { font-size: 2.6rem; color: var(--accent); }
+.contact-links { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; margin-top: 40px; }
+.contact-links a {
+  padding: 14px 30px; border-radius: 50px; border: 1px solid var(--border);
+  color: var(--text); text-decoration: none; font-size: 0.9rem; transition: .3s;
+  background: rgba(255,255,255,0.03);
+}
+.contact-links a:hover {
+  border-color: var(--accent2); color: var(--accent2);
+  box-shadow: 0 0 28px rgba(34,211,238,0.3); transform: translateY(-4px);
+}
+
+footer { text-align: center; padding: 34px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem; }
+footer .mono { color: var(--accent2); }
+
+/* ============ REVEAL ANIMATION ============ */
+.reveal { opacity: 0; transform: translateY(40px); transition: 1s cubic-bezier(0.22, 1, 0.36, 1); }
+.reveal.show { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 820px) {
+  .about-grid { grid-template-columns: 1fr; }
+  nav ul { display: none; }
+  .stats { flex-wrap: wrap; gap: 26px; }
+  #cursorGlow { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- 🎬 PRELOADER -->
+<div id="preloader">
+  <div class="pre-name">Fizza Rabbani</div>
+  <div class="pre-sub">DESIGN · CODE · CREATE</div>
+  <div class="pre-bar"><i></i></div>
+</div>
+
+<!-- 🌌 AURORA + ✨ PARTICLES + 🖱️ CURSOR GLOW + 📊 PROGRESS -->
+<div class="aurora"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div></div>
+<canvas id="stars"></canvas>
+<div id="cursorGlow"></div>
+<div id="progress"></div>
+
+<!-- ================= NAVBAR ================= -->
+<nav>
+  <div class="logo">Fizza <span>Rabbani</span></div>
+  <ul>
+    <li><a href="#about">ABOUT</a></li>
+    <li><a href="#skills">SKILLS</a></li>
+    <li><a href="#education">EDUCATION</a></li>
+    <li><a href="#projects">PROJECTS</a></li>
+    <li><a href="#videos">VIDEOS</a></li>
+    <li><a href="#contact">CONTACT</a></li>
+  </ul>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="tag">&lt; HELLO WORLD /&gt;</div>
+  <h1 id="heroTitle">I'm Fizza Rabbani</h1>
+  <div class="typing-box">I am a <span id="typed"></span><span class="cursor-blink"></span></div>
+  <p class="subtitle">
+    AD Computer Science student (3rd Semester) · Graphic Designer · Video Editor ·
+    exploring <strong style="color:var(--accent2)">Artificial Intelligence</strong>.
+    I blend code, design & storytelling to build things that look good and work beautifully.
+  </p>
+  <a href="#projects" class="btn">View My Work</a>
+  <a href="#contact" class="btn ghost">Hire Me</a>
+  <div class="signature">— Fizza Rabbani</div>
+  <div class="scroll-hint">SCROLL</div>
+</header>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="sec-title reveal">
+    <div class="mono">// 01. WHO I AM</div>
+    <h2>About <em>Me</em></h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-card reveal">
+      <div class="avatar">FR</div>
+      <div class="script">Fizza Rabbani</div>
+      <p class="mono" style="color:var(--accent2); font-size:0.8rem; margin-top:6px;">CS STUDENT · DESIGNER · EDITOR</p>
+    </div>
+    <div class="about-text reveal">
+      <p>I'm <strong>Fizza Rabbani</strong>, an <strong>AD Computer Science student (3rd Semester)</strong> with a passion for creativity and technology.</p>
+      <p>Alongside my studies, I work as a <strong>Graphic Designer</strong> crafting logos, social media designs and brand identities — and as a <strong>Video Editor</strong> creating engaging edits and visual stories.</p>
+      <p>I'm currently learning <strong>Artificial Intelligence</strong>, combining my design eye with technical skills to grow as a complete creative technologist.</p>
+      <div class="stats">
+        <div><b class="counter" data-target="3">0</b><small>Skills Mastered</small></div>
+        <div><b class="counter" data-target="10">0</b><small>Projects Done</small></div>
+        <div><b class="counter" data-target="100">0</b><small>% Dedication</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section id="skills">
+  <div class="sec-title reveal">
+    <div class="mono">// 02. WHAT I DO</div>
+    <h2>My <em>Skills</em></h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card reveal" style="--w:90%">
+      <div class="icon">🎨</div>
+      <h3>Graphic Design</h3>
+      <p>Logos, posters, social media posts & branding using Photoshop & Illustrator.</p>
+      <div class="level"><i></i></div><span class="pct">90%</span>
+    </div>
+    <div class="skill-card reveal" style="--w:85%">
+      <div class="icon">🎬</div>
+      <h3>Video Editing</h3>
+      <p>Reels, YouTube edits, transitions, color grading & storytelling.</p>
+      <div class="level"><i></i></div><span class="pct">85%</span>
+    </div>
+    <div class="skill-card reveal" style="--w:75%">
+      <div class="icon">💻</div>
+      <h3>Computer Science</h3>
+      <p>Programming fundamentals, problem solving & logical thinking (AD Computer Science).</p>
+      <div class="level"><i></i></div><span class="pct">75%</span>
+    </div>
+    <div class="skill-card reveal" style="--w:60%">
+      <div class="icon">🤖</div>
+      <h3>Artificial Intelligence</h3>
+      <p>Currently learning AI concepts, tools & practical applications.</p>
+      <div class="level"><i></i></div><span class="pct">Learning…</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EDUCATION ================= -->
+<section id="education">
+  <div class="sec-title reveal">
+    <div class="mono">// 03. JOURNEY</div>
+    <h2>My <em>Education</em></h2>
+  </div>
+  <div class="timeline">
+    <div class="t-item reveal">
+      <span class="mono">2024 — PRESENT</span>
+      <h3>AD Computer Science — 3rd Semester</h3>
+      <p>Studying programming, databases & software fundamentals while building real-world creative skills.</p>
+    </div>
+    <div class="t-item reveal">
+      <span class="mono">ONGOING</span>
+      <h3>Artificial Intelligence Course</h3>
+      <p>Learning AI fundamentals, tools and how to apply them to design & development.</p>
+    </div>
+    <div class="t-item reveal">
+      <span class="mono">SELF-TAUGHT</span>
+      <h3>Graphic Design & Video Editing</h3>
+      <p>Mastered professional design & editing tools through practice, projects and clients.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section id="projects">
+  <div class="sec-title reveal">
+    <div class="mono">// 04. PORTFOLIO</div>
+    <h2>Featured <em>Projects</em></h2>
+  </div>
+  <div class="projects-grid">
+    <div class="project reveal">
+      <div class="cover c1">🎨</div>
+      <div class="info">
+        <span class="mono">GRAPHIC DESIGN</span>
+        <h3>Brand Identity Design</h3>
+        <p>Complete logo & branding kit designed for a client business.</p>
+      </div>
+    </div>
+    <div class="project reveal">
+      <div class="cover c2">🎬</div>
+      <div class="info">
+        <span class="mono">VIDEO EDITING</span>
+        <h3>Reels & Promotional Edits</h3>
+        <p>Short-form video content with motion graphics & smooth transitions.</p>
+      </div>
+    </div>
+    <div class="project reveal">
+      <div class="cover c3">🤖</div>
+      <div class="info">
+        <span class="mono">ARTIFICIAL INTELLIGENCE</span>
+        <h3>AI Learning Projects</h3>
+        <p>Hands-on AI experiments & tools built during my AI course.</p>
+      </div>
+    </div>
+    <div class="project reveal">
+      <div class="cover c4">💻</div>
+      <div class="info">
+        <span class="mono">COMPUTER SCIENCE</span>
+        <h3>CS Semester Projects</h3>
+        <p>Programming assignments & applications built during AD studies.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================
+     🎬 APNI VIDEO KAISE ADD KAREIN (HOW TO ADD YOUR VIDEO):
+     
+     Tariqa 1 (Sab se aasan - Website par click karein):
+     - Website ko browser me kholen aur "+ Add Video" button dabayein.
+     - Apne computer se video (.mp4) select karein ya YouTube ka link dalein.
+     - Details likh kar "Add to Showreel" dabayein. Video foran save ho jayegi!
+     
+     Tariqa 2 (Code ke zariye):
+     - Apni video file ko 'videos' folder me dalein (maslan: videos/my-video.mp4).
+     ======================================================== -->
+<!-- ================= VIDEO SHOWREEL ================= -->
+<section id="videos">
+  <div class="sec-title reveal" style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;">
+    <div>
+      <div class="mono">// 05. SHOWREEL</div>
+      <h2>Video <em>Showreel</em></h2>
+    </div>
+    <button type="button" id="openAddModalBtn" class="btn" style="padding:12px 24px; font-size:0.88rem; display:inline-flex; align-items:center; gap:8px; cursor:pointer;">
+      <span style="font-size:1.1rem; line-height:1;">➕</span> Add Video
+    </button>
+  </div>
+
+  <!-- Helpful Guide Tip -->
+  <div class="reveal" style="background:rgba(59,130,246,0.08); border:1px solid rgba(96,165,250,0.22); border-radius:14px; padding:12px 20px; margin-bottom:28px; font-size:0.86rem; color:var(--muted); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+    <span>🎬 <strong>Apni Video Add Karein:</strong> <em>"+ Add Video"</em> button par click karke apne computer se video ya YouTube link add karein!</span>
+    <span class="mono" style="font-size:0.75rem; color:var(--accent2); background:rgba(34,211,238,0.1); padding:3px 8px; border-radius:6px;">✨ Auto-Saved</span>
+  </div>
+
+  <div class="video-grid" id="videoGrid">
+    <!-- Video cards and "+ Add New Reel" card will be rendered here dynamically -->
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="contact-wrap reveal">
+    <div class="mono" style="color:var(--accent2); letter-spacing:3px;">// 06. GET IN TOUCH</div>
+    <h2 style="font-size:2.4rem; margin:10px 0;">Let's Work <em style="font-style:normal; background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent;">Together</em></h2>
+    <div class="script">Have a project in mind?</div>
+    <p style="color:var(--muted); margin-top:14px;">I'm available for graphic design, video editing and collaboration opportunities.</p>
+    <div class="contact-links">
+      <a href="mailto:your-email@gmail.com">📧 Email Me</a>
+      <a href="#" target="_blank">🔗 LinkedIn</a>
+      <a href="#" target="_blank">📸 Instagram</a>
+      <a href="#" target="_blank">💻 GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Designed & Built with ❤️ by <span class="mono">Fizza Rabbani</span> · © 2025
+</footer>
+
+<!-- Video Lightbox Modal -->
+<div class="video-lightbox" id="videoLightbox">
+  <div class="lb-inner">
+    <button class="lb-close" id="lbClose" title="Close modal">&times;</button>
+    <div id="lbPlayerContainer" style="width:100%; aspect-ratio:16/9; background:#000; border-radius:20px; overflow:hidden; display:flex; align-items:center; justify-content:center;">
+      <video id="lbVideo" controls style="width:100%; height:100%; display:none; background:#000;"></video>
+      <iframe id="lbIframe" allow="autoplay; encrypted-media; fullscreen" allowfullscreen style="width:100%; height:100%; border:none; display:none;"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- 📝 Add Video Modal -->
+<div class="add-modal-overlay" id="addModalOverlay">
+  <div class="add-modal">
+    <button type="button" class="close-modal" id="closeAddModal" title="Close">&times;</button>
+    <h3>Add <em>Video Reel</em></h3>
+    <div class="modal-sub">// SHOWCASE YOUR CREATIVE WORK</div>
+
+    <!-- Source Type Switcher -->
+    <div class="source-type-tab">
+      <button type="button" class="active" id="tabUploadFile">📁 Upload Video File</button>
+      <button type="button" id="tabPasteLink">🔗 YouTube / Online Link</button>
+    </div>
+
+    <form id="addVideoForm">
+      <!-- File Picker Pane -->
+      <div class="form-group" id="paneUploadFile">
+        <label>Select Video File (MP4, WebM, MOV)</label>
+        <div class="file-picker" id="filePicker">
+          <div class="fp-icon">🎬</div>
+          <div class="fp-text">Click or drag &amp; drop your video here</div>
+          <div class="fp-name" id="fpName"></div>
+          <input type="file" id="videoFileInput" accept="video/mp4,video/webm,video/ogg,video/quicktime">
+        </div>
+      </div>
+
+      <!-- URL Pane (Hidden by default) -->
+      <div class="form-group" id="panePasteLink" style="display:none;">
+        <label>Video URL (YouTube or Direct Video Link)</label>
+        <input type="url" id="videoUrlInput" placeholder="https://www.youtube.com/watch?v=... or .mp4 link">
+        <small style="display:block; color:var(--muted); font-size:0.75rem; margin-top:6px;">
+          Supports YouTube, YouTube Shorts, or direct video files (.mp4 / .webm)
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label>Video Title</label>
+        <input type="text" id="videoTitle" placeholder="e.g. Promotional Reel / Brand Identity Edit" required>
+      </div>
+
+      <div class="form-group">
+        <label>Description</label>
+        <textarea id="videoDesc" placeholder="e.g. Dynamic edits, smooth transitions & color grading in Premiere Pro..." rows="2"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Tags (comma separated)</label>
+        <input type="text" id="videoTags" placeholder="Transitions, Motion GFX, Color Grading">
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn" id="submitAddVideoBtn">Add to Showreel 🎬</button>
+        <button type="button" class="btn ghost" id="cancelAddVideo">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+/* ===== 🎬 PRELOADER ===== */
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('preloader').classList.add('done'), 2400);
+  startHeroAnimation();
+});
+
+/* ===== ✍️ HERO LETTER-BY-LETTER ===== */
+function startHeroAnimation() {
+  const title = document.getElementById('heroTitle');
+  const text = "I'm Fizza Rabbani";
+  title.innerHTML = '';
+  let delay = 0.3;
+  text.split(' ').forEach(word => {
+    const w = document.createElement('span');
+    w.className = 'word';
+    [...word].forEach(ch => {
+      const i = document.createElement('i');
+      i.textContent = ch;
+      i.style.animationDelay = delay + 's';
+      w.appendChild(i);
+      delay += 0.05;
+    });
+    w.innerHTML += '&nbsp;';
+    title.appendChild(w);
+  });
+}
+
+/* ===== ⌨️ TYPING EFFECT ===== */
+const roles = ['Graphic Designer 🎨', 'Video Editor 🎬', 'AI Learner 🤖', 'AD CS Student 💻', 'Creative Developer ✨'];
+let ri = 0, ci = 0, deleting = false;
+function typeLoop() {
+  const el = document.getElementById('typed');
+  const word = roles[ri];
+  el.textContent = word.slice(0, ci);
+  if (!deleting && ci < word.length) { ci++; setTimeout(typeLoop, 80); }
+  else if (deleting && ci > 0) { ci--; setTimeout(typeLoop, 40); }
+  else if (!deleting) { deleting = true; setTimeout(typeLoop, 1600); }
+  else { deleting = false; ri = (ri + 1) % roles.length; setTimeout(typeLoop, 300); }
+}
+typeLoop();
+
+/* ===== ✨ GLOWING PARTICLES ===== */
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+function resize() { canvas.width = innerWidth; canvas.height = innerHeight; }
+resize();
+addEventListener('resize', resize);
+
+const COLORS = ['#60a5fa', '#22d3ee', '#a78bfa', '#ffffff'];
+const particles = [];
+for (let i = 0; i < 70; i++) {
+  particles.push({
+    x: Math.random() * innerWidth,
+    y: Math.random() * innerHeight,
+    r: Math.random() * 2 + 0.5,
+    s: Math.random() * 0.4 + 0.1,
+    c: COLORS[Math.floor(Math.random() * COLORS.length)],
+    tw: Math.random() * Math.PI * 2
+  });
+}
+function drawStars() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => {
+    p.y -= p.s; p.tw += 0.03;
+    if (p.y < -10) { p.y = canvas.height + 10; p.x = Math.random() * innerWidth; }
+    ctx.globalAlpha = Math.max(0.35 + Math.sin(p.tw) * 0.3, 0.06);
+    ctx.fillStyle = p.c;
+    ctx.shadowBlur = 6;
+    ctx.shadowColor = p.c;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  ctx.globalAlpha = 1;
+  requestAnimationFrame(drawStars);
+}
+drawStars();
+
+/* ===== 🖱️ CURSOR GLOW ===== */
+const glow = document.getElementById('cursorGlow');
+addEventListener('mousemove', e => {
+  glow.style.left = e.clientX + 'px';
+  glow.style.top = e.clientY + 'px';
+});
+
+/* ===== 📊 SCROLL PROGRESS ===== */
+addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  document.getElementById('progress').style.width = pct + '%';
+});
+
+/* ===== 🎯 REVEAL + COUNTERS ===== */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('show');
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal, .skill-card').forEach(el => observer.observe(el));
+
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target, target = +el.dataset.target;
+    let cur = 0;
+    const step = Math.max(1, Math.round(target / 60));
+    const t = setInterval(() => {
+      cur += step;
+      if (cur >= target) { cur = target; clearInterval(t); }
+      el.textContent = cur + (target === 100 ? '' : '+');
+    }, 30);
+    counterObs.unobserve(el);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.counter').forEach(el => counterObs.observe(el));
+
+/* ===== 🎬 VIDEO SHOWREEL MANAGER (IndexedDB + Storage + YouTube) ===== */
+const videoGrid = document.getElementById('videoGrid');
+const openAddModalBtn = document.getElementById('openAddModalBtn');
+const addModalOverlay = document.getElementById('addModalOverlay');
+const closeAddModal = document.getElementById('closeAddModal');
+const cancelAddVideo = document.getElementById('cancelAddVideo');
+const addVideoForm = document.getElementById('addVideoForm');
+const tabUploadFile = document.getElementById('tabUploadFile');
+const tabPasteLink = document.getElementById('tabPasteLink');
+const paneUploadFile = document.getElementById('paneUploadFile');
+const panePasteLink = document.getElementById('panePasteLink');
+const filePicker = document.getElementById('filePicker');
+const videoFileInput = document.getElementById('videoFileInput');
+const fpName = document.getElementById('fpName');
+const videoUrlInput = document.getElementById('videoUrlInput');
+const lightbox = document.getElementById('videoLightbox');
+const lbVideo = document.getElementById('lbVideo');
+const lbIframe = document.getElementById('lbIframe');
+const lbCloseBtn = document.getElementById('lbClose');
+
+let currentSourceType = 'file'; // 'file' or 'link'
+let selectedVideoFile = null;
+const blobUrlCache = {}; // id -> blobUrl
+
+/* --- IndexedDB Helper for video files --- */
+function openVideosDB() {
+  return new Promise((resolve, reject) => {
+    if (!window.indexedDB) { resolve(null); return; }
+    const req = indexedDB.open('FizzaPortfolioVideos', 1);
+    req.onupgradeneeded = (e) => {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains('files')) {
+        db.createObjectStore('files');
+      }
+    };
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => resolve(null);
+  });
+}
+
+async function saveFileToDB(id, blob) {
+  try {
+    const db = await openVideosDB();
+    if (!db) return false;
+    return new Promise((resolve) => {
+      const tx = db.transaction('files', 'readwrite');
+      tx.objectStore('files').put(blob, id);
+      tx.oncomplete = () => resolve(true);
+      tx.onerror = () => resolve(false);
+    });
+  } catch (err) {
+    console.warn('IndexedDB save failed:', err);
+    return false;
+  }
+}
+
+async function getFileFromDB(id) {
+  try {
+    const db = await openVideosDB();
+    if (!db) return null;
+    return new Promise((resolve) => {
+      const tx = db.transaction('files', 'readonly');
+      const req = tx.objectStore('files').get(id);
+      req.onsuccess = () => resolve(req.result || null);
+      req.onerror = () => resolve(null);
+    });
+  } catch (err) {
+    return null;
+  }
+}
+
+async function deleteFileFromDB(id) {
+  try {
+    const db = await openVideosDB();
+    if (!db) return;
+    const tx = db.transaction('files', 'readwrite');
+    tx.objectStore('files').delete(id);
+  } catch (err) {}
+}
+
+/* --- LocalStorage Metadata --- */
+const DEFAULT_VIDEOS = [
+  {
+    id: 'sample_1',
+    title: 'Promotional Reel / Dynamic Edit',
+    desc: 'High-energy cuts with custom transitions, typography, and motion design.',
+    tags: ['Transitions', 'Color Grading', 'Motion GFX'],
+    type: 'url',
+    url: 'https://assets.mixkit.co/videos/preview/mixkit-vertical-video-of-a-woman-dancing-in-a-cyberpunk-room-41387-large.mp4',
+    isSample: true
+  },
+  {
+    id: 'sample_2',
+    title: 'Creative Social Media Showcase',
+    desc: 'Engaging short-form reel crafted for audience engagement and brand aesthetics.',
+    tags: ['Reels', 'Short Form', 'Aesthetics'],
+    type: 'url',
+    url: 'https://assets.mixkit.co/videos/preview/mixkit-hands-holding-a-smartphone-with-a-green-screen-vertical-41487-large.mp4',
+    isSample: true
+  }
+];
+
+function getStoredVideoMeta() {
+  try {
+    const data = localStorage.getItem('portfolio_video_items');
+    return data ? JSON.parse(data) : DEFAULT_VIDEOS;
+  } catch {
+    return DEFAULT_VIDEOS;
+  }
+}
+
+function saveVideoMeta(list) {
+  localStorage.setItem('portfolio_video_items', JSON.stringify(list));
+}
+
+/* --- YouTube URL Parser --- */
+function parseYouTubeId(url) {
+  if (!url) return null;
+  const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))([\w-]{11})/);
+  return match ? match[1] : null;
+}
+
+/* --- Render Video Grid --- */
+async function renderVideoGrid() {
+  videoGrid.innerHTML = '';
+  const videos = getStoredVideoMeta();
+
+  for (const item of videos) {
+    const card = document.createElement('div');
+    card.className = 'video-card reveal show';
+    card.dataset.id = item.id;
+
+    let mediaHTML = '';
+    let playbackSrc = '';
+    const ytId = item.type === 'link' ? parseYouTubeId(item.url) : null;
+
+    if (item.type === 'file') {
+      let blobUrl = blobUrlCache[item.id];
+      if (!blobUrl) {
+        const blob = await getFileFromDB(item.id);
+        if (blob) {
+          blobUrl = URL.createObjectURL(blob);
+          blobUrlCache[item.id] = blobUrl;
+        }
+      }
+      playbackSrc = blobUrl || '';
+      mediaHTML = `
+        <span class="badge-tag file-badge">📁 LOCAL MP4</span>
+        <div class="video-thumb">
+          ${blobUrl ? `<video src="${blobUrl}" muted loop preload="metadata"></video>` : '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted);">No Video Data</div>'}
+          <div class="play-overlay"><div class="play-btn"></div></div>
+        </div>
+      `;
+    } else if (ytId) {
+      playbackSrc = `https://www.youtube.com/embed/${ytId}?autoplay=1`;
+      mediaHTML = `
+        <span class="badge-tag">▶ YOUTUBE</span>
+        <div class="video-thumb">
+          <img src="https://img.youtube.com/vi/${ytId}/hqdefault.jpg" alt="${item.title}" style="width:100%;height:100%;object-fit:cover;">
+          <div class="play-overlay"><div class="play-btn"></div></div>
+        </div>
+      `;
+    } else {
+      playbackSrc = item.url;
+      mediaHTML = `
+        <span class="badge-tag" style="background:rgba(59,130,246,0.2); color:#93c5fd; border-color:rgba(59,130,246,0.3);">🎬 ONLINE VIDEO</span>
+        <div class="video-thumb">
+          <video src="${item.url}" muted loop preload="metadata"></video>
+          <div class="play-overlay"><div class="play-btn"></div></div>
+        </div>
+      `;
+    }
+
+    const tagsHTML = (item.tags || []).map(t => `<span>${t}</span>`).join('');
+
+    card.innerHTML = `
+      <button type="button" class="delete-btn" title="Delete this video" data-del="${item.id}">&times;</button>
+      ${mediaHTML}
+      <div class="info">
+        <span class="mono">${item.isSample ? '// SAMPLE PREVIEW' : '// VIDEO SHOWREEL'}</span>
+        <h3>${item.title}</h3>
+        <p>${item.desc || ''}</p>
+        ${tagsHTML ? `<div class="tags">${tagsHTML}</div>` : ''}
+      </div>
+    `;
+
+    // Bind card click → lightbox
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.delete-btn')) return;
+      openLightbox(playbackSrc, Boolean(ytId));
+    });
+
+    // Hover preview for native videos
+    const thumbVid = card.querySelector('.video-thumb video');
+    if (thumbVid) {
+      card.addEventListener('mouseenter', () => thumbVid.play().catch(() => {}));
+      card.addEventListener('mouseleave', () => { thumbVid.pause(); thumbVid.currentTime = 0; });
+    }
+
+    // Delete handler
+    const delBtn = card.querySelector('.delete-btn');
+    delBtn.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      if (!confirm(`Are you sure you want to remove "${item.title}"?`)) return;
+      await deleteVideoItem(item.id);
+    });
+
+    videoGrid.appendChild(card);
+  }
+
+  // Append "+ Add New Reel" card
+  const addCard = document.createElement('div');
+  addCard.className = 'add-video-card reveal show';
+  addCard.id = 'addVideoCard';
+  addCard.innerHTML = `
+    <div class="add-icon">+</div>
+    <div class="add-label">ADD NEW REEL</div>
+    <small style="color:var(--muted); font-size:0.75rem; text-align:center; max-width:80%;">
+      Upload your video or paste YouTube / MP4 link
+    </small>
+  `;
+  addCard.addEventListener('click', openAddModal);
+  videoGrid.appendChild(addCard);
+}
+
+/* --- Delete Item --- */
+async function deleteVideoItem(id) {
+  let list = getStoredVideoMeta();
+  list = list.filter(v => v.id !== id);
+  saveVideoMeta(list);
+
+  if (blobUrlCache[id]) {
+    URL.revokeObjectURL(blobUrlCache[id]);
+    delete blobUrlCache[id];
+  }
+  await deleteFileFromDB(id);
+  renderVideoGrid();
+}
+
+/* --- Lightbox Logic --- */
+function openLightbox(src, isIframe) {
+  if (!src) return;
+  if (isIframe) {
+    lbVideo.style.display = 'none';
+    lbVideo.pause();
+    lbIframe.src = src;
+    lbIframe.style.display = 'block';
+  } else {
+    lbIframe.style.display = 'none';
+    lbIframe.src = '';
+    lbVideo.src = src;
+    lbVideo.style.display = 'block';
+    lbVideo.play().catch(() => {});
+  }
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('active');
+  document.body.style.overflow = '';
+  lbVideo.pause();
+  lbVideo.src = '';
+  lbIframe.src = '';
+}
+
+lbCloseBtn.addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) closeLightbox();
+});
+
+/* --- Add Modal Logic --- */
+function openAddModal() {
+  addModalOverlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeAddModalFn() {
+  addModalOverlay.classList.remove('active');
+  document.body.style.overflow = '';
+  addVideoForm.reset();
+  fpName.textContent = '';
+  filePicker.classList.remove('has-file');
+  selectedVideoFile = null;
+  switchTab('file');
+}
+
+openAddModalBtn.addEventListener('click', openAddModal);
+closeAddModal.addEventListener('click', closeAddModalFn);
+cancelAddVideo.addEventListener('click', closeAddModalFn);
+addModalOverlay.addEventListener('click', (e) => {
+  if (e.target === addModalOverlay) closeAddModalFn();
+});
+
+/* --- Tab Switching --- */
+function switchTab(type) {
+  currentSourceType = type;
+  if (type === 'file') {
+    tabUploadFile.classList.add('active');
+    tabPasteLink.classList.remove('active');
+    paneUploadFile.style.display = 'block';
+    panePasteLink.style.display = 'none';
+  } else {
+    tabPasteLink.classList.add('active');
+    tabUploadFile.classList.remove('active');
+    panePasteLink.style.display = 'block';
+    paneUploadFile.style.display = 'none';
+  }
+}
+tabUploadFile.addEventListener('click', () => switchTab('file'));
+tabPasteLink.addEventListener('click', () => switchTab('link'));
+
+/* --- File Picker Interactions --- */
+filePicker.addEventListener('click', () => videoFileInput.click());
+filePicker.addEventListener('dragover', (e) => {
+  e.preventDefault();
+  filePicker.style.borderColor = 'var(--accent2)';
+});
+filePicker.addEventListener('dragleave', () => {
+  filePicker.style.borderColor = '';
+});
+filePicker.addEventListener('drop', (e) => {
+  e.preventDefault();
+  filePicker.style.borderColor = '';
+  const file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('video/')) {
+    setVideoFile(file);
+  } else {
+    alert('Please drop a valid video file (.mp4, .webm, .mov)!');
+  }
+});
+videoFileInput.addEventListener('change', () => {
+  if (videoFileInput.files[0]) {
+    setVideoFile(videoFileInput.files[0]);
+  }
+});
+
+function setVideoFile(file) {
+  selectedVideoFile = file;
+  fpName.textContent = `✓ ${file.name} (${(file.size / (1024 * 1024)).toFixed(1)} MB)`;
+  filePicker.classList.add('has-file');
+}
+
+/* --- Submit Add Video --- */
+addVideoForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const title = document.getElementById('videoTitle').value.trim();
+  const desc = document.getElementById('videoDesc').value.trim();
+  const tagsStr = document.getElementById('videoTags').value.trim();
+  const tags = tagsStr ? tagsStr.split(',').map(t => t.trim()).filter(Boolean) : [];
+  const id = 'vid_' + Date.now();
+
+  const submitBtn = document.getElementById('submitAddVideoBtn');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Saving Video... ⏳';
+
+  try {
+    if (currentSourceType === 'file') {
+      if (!selectedVideoFile) {
+        alert('Please choose or drop a video file first!');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Add to Showreel 🎬';
+        return;
+      }
+
+      // Save file blob to IndexedDB
+      await saveFileToDB(id, selectedVideoFile);
+      blobUrlCache[id] = URL.createObjectURL(selectedVideoFile);
+
+      // Save metadata
+      const list = getStoredVideoMeta().filter(v => !v.isSample); // remove default samples when user adds their own
+      list.unshift({
+        id,
+        title,
+        desc,
+        tags,
+        type: 'file',
+        fileName: selectedVideoFile.name,
+        dateAdded: Date.now()
+      });
+      saveVideoMeta(list);
+    } else {
+      const url = videoUrlInput.value.trim();
+      if (!url) {
+        alert('Please enter a YouTube link or video URL!');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Add to Showreel 🎬';
+        return;
+      }
+
+      const list = getStoredVideoMeta().filter(v => !v.isSample);
+      list.unshift({
+        id,
+        title,
+        desc,
+        tags,
+        type: 'link',
+        url,
+        dateAdded: Date.now()
+      });
+      saveVideoMeta(list);
+    }
+
+    closeAddModalFn();
+    await renderVideoGrid();
+  } catch (err) {
+    console.error('Error adding video:', err);
+    alert('Something went wrong while adding the video. Please try again!');
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Add to Showreel 🎬';
+  }
+});
+
+/* --- Escape Key Handler --- */
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    if (lightbox.classList.contains('active')) closeLightbox();
+    if (addModalOverlay.classList.contains('active')) closeAddModalFn();
+  }
+});
+
+/* --- Initialize Video Grid --- */
+renderVideoGrid();
+</script>
+
+</body>
+</html>
